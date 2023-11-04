@@ -27,7 +27,7 @@ const Check = () => {
     }
 
     const checkBingo = (bingoCode) => {
-        fetch(`http://localhost:5001/check-bingo?current_track=${current_track}&game_code=${gameCode}&bingo_code=${bingoCode}&win=${wins}`, {
+        fetch(import.meta.env.VITE_BASE_URL + `/check-bingo?current_track=${current_track}&game_code=${gameCode}&bingo_code=${bingoCode}&win=${wins}`, {
             credentials: "include",
         })
             .then((response) => {

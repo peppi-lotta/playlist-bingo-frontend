@@ -31,7 +31,7 @@ const Bingo = () => {
     };
 
     const fetchBingo = () => {
-        fetch(`http://localhost:5001/auth/bingo?code=${code}`, {
+        fetch(import.meta.env.VITE_BASE_URL + `/auth/bingo?code=${code}`, {
             credentials: "include",
         })
             .then(response => {

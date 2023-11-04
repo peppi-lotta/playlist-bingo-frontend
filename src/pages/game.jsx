@@ -47,7 +47,7 @@ const Game = () => {
     }
 
     const fetchGame = () => {
-        fetch(`http://localhost:5001/api/start-game?type=${type}&playlist_id=${playlist_id}`, {
+        fetch(import.meta.env.VITE_BASE_URL + `/api/start-game?type=${type}&playlist_id=${playlist_id}`, {
             credentials: "include",
         }).then(response => {
             return response.json();

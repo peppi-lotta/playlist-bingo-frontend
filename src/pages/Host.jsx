@@ -14,7 +14,7 @@ const Host = () => {
   };
 
   const fetchPlaylists = () => {
-    fetch(`http://localhost:5001/api/playlists?offset=${offset}&limit=${limit}`, {
+    fetch(import.meta.env.VITE_BASE_URL + `/api/playlists?offset=${offset}&limit=${limit}`, {
       credentials: "include",
     })
       .then(response => {

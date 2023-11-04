@@ -15,7 +15,7 @@ const Signin = () => {
   }, []);
 
   const handleSpotifySignin = () => {
-    window.location.href = `http://localhost:5001/auth/spotify`;
+    window.location.href = import.meta.env.VITE_BASE_URL + `/auth/spotify`;
   };
 
   const handleBingoSignin = (event) => {
