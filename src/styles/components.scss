@@ -1,0 +1,135 @@
+$black: #120901;
+$white: #C8C8C8;
+$yellow: #F0E100;
+
+.host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+
+    .playlist-list {
+        margin: 20px 0;
+    }
+}
+
+.signin {
+    height: 100vh;
+    justify-content: space-around;
+
+    .logo {
+        padding-top: 30%;
+    }
+
+    .want-to-host {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: auto;
+        margin-bottom: 50px;
+    }
+}
+
+.bingo {
+    display: flex;
+    font-size: 16px;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .tracks {
+        display: flex;
+        flex-wrap: wrap;
+        border: $white solid 3px;
+        border-radius: 15px;
+        justify-content: space-around;
+        align-items: center;
+        height: calc(100% - 50px);
+        margin-top: auto;
+        margin-bottom: auto;
+
+        .track {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: $white solid 3px;
+            border-radius: 15px;
+            width: calc(100% / 5 - 15px);
+            height: calc(100% / 3 - 15px);
+
+            &.active {
+                background: $yellow;
+                color: $black;
+            }
+        }
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
+        padding: 10px;
+        font-size: 24px;
+        color: $yellow;
+        font-weight: 700;
+    }
+}
+
+.game {
+    font-weight: 700;
+    font-size: 24px;
+    height: 100vh;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 50px);
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+        border: $white solid 3px;
+        border-radius: 20px;
+        padding: 25px;
+    }
+
+    .preview {
+        border: none;
+        width: calc(100%);
+    }
+
+    .code {
+        color: $yellow;
+        font-size: 32px;
+    }
+
+    .track-count {
+        margin-top: 50px;
+    }
+
+    .artist {
+        color: $yellow;
+        font-size: 32px;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%;
+
+        &.game-options {
+            margin-top: auto;
+            margin-bottom: 25px;
+        }
+    }
+
+    .looking-for {
+        color: $yellow;
+        font-size: 20px;
+        margin-top: 25px;
+    }
+}
