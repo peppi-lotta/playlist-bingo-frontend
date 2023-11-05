@@ -5,6 +5,7 @@ import Signin from './pages/Signin';
 import Bingo from './pages/bingo';
 import Game from './pages/game';
 import Check from './pages/check';
+import Test from './pages/test';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/bingo" element={<Bingo />}/>
           <Route path="/game" element={<Game />}/>
           <Route path='/check' element={<Check />}/>
+          <Route path='/Test' element={<Test />}/>
         </Routes>
       </Router>
     </>

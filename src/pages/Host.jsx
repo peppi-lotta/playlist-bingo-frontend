@@ -8,19 +8,17 @@ const Host = () => {
   const [offset, setOffset] = useState(0)
   const limit = 7
 
-  const handleButtonClick = (event) => {
-    event.preventDefault()
-    setOffset(offset + limit);
-  };
-
   const fetchPlaylists = () => {
     fetch(import.meta.env.VITE_BASE_URL + `/api/playlists?offset=${offset}&limit=${limit}`, {
+      method: 'GET',
       credentials: "include",
+      redirect: 'follow'
     })
       .then(response => {
         return response.json();
       })
       .then(data => {
+        console.log(data)
         setPlaylists(data.playlists);
       })
       .catch(error => {
@@ -55,9 +53,20 @@ const Host = () => {
               <label htmlFor={playlist.id}>{playlist.name}</label>
             </div>
           ))}
-          {playlists.length == offset + limit && (
-            <button className="tertiary" onClick={handleButtonClick}>Load more</button>
-          )}
+        </div>
+        <div className='controls game-options'>
+          <button
+            onClick={() => {setOffset(offset + limit)}}
+            className={`secondary fit ${offset === 0 ? 'disabled-button' : ''}`}
+          >
+            End game
+          </button>
+          <button
+            onClick={() => {setOffset(offset - limit)}}
+            className={`secondary fit ${playlists.length == offset + limit ? 'disabled-button' : ''}`}
+          >
+            BINGO
+          </button>
         </div>
         <input type='submit' value="START" />
       </form>
