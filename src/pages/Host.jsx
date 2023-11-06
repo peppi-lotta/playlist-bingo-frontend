@@ -28,9 +28,9 @@ const Host = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const type = event.target.type.value;
+    /* const type = event.target.type.value; */
     const playlist_id = event.target.playlist.value;
-    window.location.href = `/game?type=${type}&playlist_id=${playlist_id}`;
+    window.location.href = `/game?playlist_id=${playlist_id}`;
   }
 
   useEffect(() => {
@@ -41,10 +41,10 @@ const Host = () => {
     <div className="host wrap">
       <LogoComponent largeSize={false} />
       <form onSubmit={handleSubmit}>
-        <select name="type">
+{/*         <select name="type">
           <option value="artist">New Artist Bingo</option>
           <option vlaue="song">New Song Bingo</option>
-        </select>
+        </select> */}
         <div className="playlist-list">
           <p>Choose a playlist:</p>
           {playlists.map(playlist => (
@@ -56,16 +56,18 @@ const Host = () => {
         </div>
         <div className='controls game-options'>
           <button
-            onClick={() => {setOffset(offset + limit)}}
+            onClick={(event) => {event.preventDefault(); setOffset(offset - limit);}}
             className={`secondary fit ${offset === 0 ? 'disabled-button' : ''}`}
+            disabled={offset === 0}
           >
-            End game
+            Previous
           </button>
           <button
-            onClick={() => {setOffset(offset - limit)}}
-            className={`secondary fit ${playlists.length == offset + limit ? 'disabled-button' : ''}`}
+            onClick={(event) => {event.preventDefault(); setOffset(offset + limit);}}
+            className={`secondary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
+            disabled={playlists.length < limit}
           >
-            BINGO
+            Next
           </button>
         </div>
         <input type='submit' value="START" />

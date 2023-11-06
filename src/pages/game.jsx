@@ -8,7 +8,6 @@ const Game = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const playlist_id = queryParams.get('playlist_id');
-    const type = queryParams.get('type');
 
     const [game, setGame] = useState()
     const [currentTrack, setCurrentTrack] = useState(0)
@@ -18,6 +17,7 @@ const Game = () => {
     const [artistVisible, setArtistVisible] = useState(false);
     const revealArtist = 24;
     const [lookingForWin, setLookingForWin] = useState(1)
+    const [gameStarted, setGameStarted] = useState(false)
 
     const lookingFor = {
         1: 'Looking for 5 anywhere',
@@ -89,7 +89,7 @@ const Game = () => {
         }
         if (parseInt(sessionStorage.getItem('wins'))) {
             setLookingForWin(parseInt(sessionStorage.getItem('wins')))
-        }else {
+        } else {
             sessionStorage.setItem('wins', 1)
         }
     }, []);
@@ -146,12 +146,14 @@ const Game = () => {
             ) : (
                 <>
                     <p>Loading game data...</p>
-                    <p>Game not loading? Try to start again</p>
-                    <button
-                        onClick={endGame}
-                    >
-                        Start new game
-                    </button>
+                    <div className='bottom'>
+                        <p>Game not loading? Try to start again</p>
+                        <button
+                            onClick={endGame}
+                        >
+                            Start new game
+                        </button>
+                    </div>
                 </>
             )}
         </div>
