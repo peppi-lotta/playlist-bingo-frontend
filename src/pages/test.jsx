@@ -5,7 +5,7 @@ import LogoComponent from '../../public/components/LogoComponent';
 
 const Test = () => {
 
-    fetch('https://playlist-bingo-back.vercel.app/test-token', {
+    fetch('https://bingo.peppilottasaari.fi/api/start-game?playlist_id=56K8I1MSbmyn6DiOejTJT2', {
         method: 'GET',
         credentials: "include",
         redirect: 'follow'
