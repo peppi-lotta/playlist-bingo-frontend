@@ -136,3 +136,25 @@ $yellow: #F0E100;
         margin-top: auto;
     }
 }
+.check {
+    height: 100vh;
+    .tertiary {
+        margin-right: auto;
+    }
+    form {
+        margin: auto;
+    }
+    p {
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .answer {
+        font-size: 32px;
+        text-align: center;
+        margin: auto;
+        .win {
+            font-size: 50px;
+            color: $yellow;
+        }
+    }
+}

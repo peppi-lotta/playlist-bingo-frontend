@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
+import AudioPlayer from '../../public/components/AudioPlayer';
 
 
 const Test = () => {
 
-    fetch(import.meta.env.VITE_BASE_URL + `/api/start-game?playlist_id=56K8I1MSbmyn6DiOejTJT2`, {
+/*     fetch(import.meta.env.VITE_BASE_URL + `/api/start-game?playlist_id=56K8I1MSbmyn6DiOejTJT2`, {
         method: 'GET',
         credentials: "include",
         redirect: 'follow'
@@ -18,12 +19,13 @@ const Test = () => {
         })
         .catch(error => {
             console.error('Error testing token:', error);
-        });
+        }); */
 
 
     return (
         <>
             <p>Hello</p>
+            <AudioPlayer />
         </>
     );
 };

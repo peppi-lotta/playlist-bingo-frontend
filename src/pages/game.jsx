@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
+import AudioPlayer from '../../public/components/AudioPlayer';
 
 const Game = () => {
 
@@ -11,13 +12,7 @@ const Game = () => {
 
     const [game, setGame] = useState()
     const [currentTrack, setCurrentTrack] = useState(0)
-    const [seconds, setSeconds] = useState(0);
-    const [trackVisible, setTrackVisible] = useState(false);
-    const revealTrack = 19;
-    const [artistVisible, setArtistVisible] = useState(false);
-    const revealArtist = 24;
     const [lookingForWin, setLookingForWin] = useState(1)
-    const [gameStarted, setGameStarted] = useState(false)
 
     const lookingFor = {
         1: 'Looking for 5 anywhere',
@@ -37,9 +32,6 @@ const Game = () => {
         const cur = currentTrack + val
         setCurrentTrack(cur)
         sessionStorage.setItem('currentTrack', cur);
-        setArtistVisible(false)
-        setTrackVisible(false)
-        setSeconds(0)
     }
 
     const check = () => {
@@ -58,25 +50,6 @@ const Game = () => {
             console.error('Error fetching game data:', error);
         });
     }
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds((prevSeconds) => prevSeconds + 1);
-        }, 1000);
-
-        if (seconds === revealTrack) {
-            setTrackVisible(true);
-        }
-
-        if (seconds === revealArtist) {
-            setArtistVisible(true)
-            clearInterval(interval)
-        }
-
-        return () => {
-            clearInterval(interval);
-        }
-    }, [seconds]);
 
     useEffect(() => {
         if (sessionStorage.getItem('game')) {
@@ -101,17 +74,7 @@ const Game = () => {
                 <>
                     <span className='code'>{game.code}</span>
                     <span className='track-count'>{currentTrack + 1} / 30</span>
-                    <span className='currently-playing'>Currently playing:</span>
-                    <div className="info">
-                        {trackVisible && (
-                            <span className='track-name'>{game.game_tracks[currentTrack]?.track_name}</span>
-                        )}
-                        {artistVisible && (
-                            <span className='artist'>{game.game_tracks[currentTrack]?.artist_name}</span>
-                        )}
-                        <iframe className="preview" title="Embedded Content" src={game.game_tracks[currentTrack]?.track_preview_url} />
-                        <p className='looking-for'>{lookingFor[lookingForWin]}</p>
-                    </div>
+                    <AudioPlayer game={game} currentTrack={currentTrack} lookingFor={lookingFor[lookingForWin]} />
                     <div className='controls'>
                         <button
                             onClick={() => changeTrack(-1)}
@@ -123,7 +86,7 @@ const Game = () => {
                         <button
                             onClick={() => changeTrack(1)}
                             className={`secondary fit ${currentTrack === 30 ? 'disabled-button' : ''}`}
-                            disabled={currentTrack === 30}
+                            disabled={currentTrack === 29}
                         >
                             Next
                         </button>

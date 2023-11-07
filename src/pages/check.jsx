@@ -51,29 +51,28 @@ const Check = () => {
 
     return (
         <div className="check wrap">
-            <button onClick={back} className='tertiary'>Back</button>
+            <button onClick={back} className='tertiary fit'>Back</button>
+            <LogoComponent largeSize={false} />
             {showResult ? (
-
                 isBingo ? (
-                    <>
-                        <p>BINGO!</p>
+                    <div className='answer'>
+                        <p>It is</p>
+                        <span className='win'>BINGO!</span>
                         <button onClick={back}>Continue game</button>
-                    </>
+                    </div>
                 ) : (
-                    <>
-                        <p>is not bingo!</p>
+                    <div className='answer'>
+                        <p>It is not bingo.</p>
                         <button onClick={back}>Continue game</button>
-                    </>
-
+                    </div>
                 )
             ) : (
             <form onSubmit={check}>
-                Check bingo:
+                <p>Check bingo:</p>
                 <input name='bingo_code' placeholder='BINGO CODE' required />
                 <input type='submit' value='CHECK' />
             </form>
             )}
-            <LogoComponent largeSize={false} />
         </div>
     );
 };
