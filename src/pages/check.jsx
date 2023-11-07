@@ -5,8 +5,9 @@ import LogoComponent from '../../public/components/LogoComponent';
 const Check = () => {
 
     const current_track = sessionStorage.getItem('currentTrack')
-    const gameCode = JSON.parse(sessionStorage.getItem('game')).code
-    const [wins, setWins] = useState(parseInt(sessionStorage.getItem('wins'))) 
+    const game = JSON.parse(sessionStorage.getItem('game'))
+    const gameCode = game.code
+    const [wins, setWins] = useState(parseInt(sessionStorage.getItem('wins')))
     const [isBingo, setIsBingo] = useState(false)
     const [showResult, setShowResult] = useState(false)
 
@@ -17,13 +18,6 @@ const Check = () => {
 
     const back = () => {
         window.location.href = `/game`;
-    }
-
-    const endGame = () => {
-        sessionStorage.removeItem('game');
-        sessionStorage.removeItem('currentTrack');
-        sessionStorage.removeItem('wins');
-        window.location.href = `.`;
     }
 
     const checkBingo = (bingoCode) => {
@@ -59,6 +53,12 @@ const Check = () => {
                         <p>It is</p>
                         <span className='win'>BINGO!</span>
                         <button onClick={back}>Continue game</button>
+                        <ul>
+                            {game.game_tracks.slice(0, current_track).map((track) => (
+                                <li key={track.artist_id}>{track.artist_name}</li>
+                            ))}
+                        </ul>
+
                     </div>
                 ) : (
                     <div className='answer'>
@@ -67,11 +67,11 @@ const Check = () => {
                     </div>
                 )
             ) : (
-            <form onSubmit={check}>
-                <p>Check bingo:</p>
-                <input name='bingo_code' placeholder='BINGO CODE' required />
-                <input type='submit' value='CHECK' />
-            </form>
+                <form onSubmit={check}>
+                    <p>Check bingo:</p>
+                    <input name='bingo_code' placeholder='BINGO CODE' required />
+                    <input type='submit' value='CHECK' />
+                </form>
             )}
         </div>
     );
