@@ -14,7 +14,7 @@ const AudioPlayer = (props) => {
         setSeconds(0)
         setArtistVisible(false)
         setTrackVisible(false)
-        setIsPaused(true)
+        setIsPaused(false)
         if (audioRef.current) {
             audioRef.current.load();
         }
@@ -56,8 +56,10 @@ const AudioPlayer = (props) => {
             setArtistVisible(true);
         }
 
-        if (seconds === 30) {
+        if (seconds === 29) {
+            console.log('next track')
             clearInterval(interval);
+            props.sendInfoToParent(true);
         }
 
         return () => {
@@ -74,12 +76,9 @@ const AudioPlayer = (props) => {
                 {artistVisible && (
                     <span className='artist'>{gameTracks[props.currentTrack]?.artist_name}</span>
                 )}
-                <audio className="preview" ref={audioRef} controls>
+                <audio className="preview" ref={audioRef} controls autoplay="true">
                     <source src={gameTracks[props.currentTrack]?.track_preview_url} type="audio/mpeg" />
                 </audio>
-                <div>
-                    Time:{30 - seconds}
-                </div>
                 <p className='looking-for'>{props.lookingFor}</p>
             </div>
         </>

@@ -29,13 +29,23 @@ const Game = () => {
     }
 
     const changeTrack = (val) => {
-        const cur = currentTrack + val
-        setCurrentTrack(cur)
-        sessionStorage.setItem('currentTrack', cur);
+        if (currentTrack < 30) {
+            const cur = currentTrack + val
+            setCurrentTrack(cur)
+            sessionStorage.setItem('currentTrack', cur);
+        }
     }
 
     const check = () => {
         window.location.href = `/check?game_code=${game.code}`;
+    }
+
+    const changeTrackFromChild = (data) => {
+        if (data === true) {
+            setTimeout(() => {
+                changeTrack(1)
+            }, 2000);
+        }
     }
 
     const fetchGame = () => {
@@ -74,7 +84,7 @@ const Game = () => {
                 <>
                     <span className='code'>{game.code}</span>
                     <span className='track-count'>{currentTrack + 1} / 30</span>
-                    <AudioPlayer game={game} currentTrack={currentTrack} lookingFor={lookingFor[lookingForWin]} />
+                    <AudioPlayer game={game} currentTrack={currentTrack} lookingFor={lookingFor[lookingForWin]} sendInfoToParent={changeTrackFromChild} />
                     <div className='controls'>
                         <button
                             onClick={() => changeTrack(-1)}
@@ -85,7 +95,7 @@ const Game = () => {
                         </button>
                         <button
                             onClick={() => changeTrack(1)}
-                            className={`secondary fit ${currentTrack === 30 ? 'disabled-button' : ''}`}
+                            className={`secondary fit ${currentTrack === 29 ? 'disabled-button' : ''}`}
                             disabled={currentTrack === 29}
                         >
                             Next
