@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
+import Info from '../../public/components/Info';
 
 
 const Signin = () => {
@@ -26,6 +27,7 @@ const Signin = () => {
 
   return (
     <div className='signin wrap'>
+      <Info />
       <LogoComponent largeSize={true} />
       <form onSubmit={handleBingoSignin}>
         <input type='number' name='code' placeholder='CODE' />

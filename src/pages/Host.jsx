@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
+import Info from '../../public/components/Info';
 
 const Host = () => {
 
@@ -39,6 +40,7 @@ const Host = () => {
 
   return (
     <div className="host wrap">
+      <Info />
       <LogoComponent largeSize={false} />
       <form onSubmit={handleSubmit}>
 {/*         <select name="type">
@@ -49,7 +51,7 @@ const Host = () => {
           <p>Choose a playlist:</p>
           {playlists.map(playlist => (
             <div className='playlist' key={playlist.id}>
-              <input type="radio" id={playlist.id} name="playlist" value={playlist.id} />
+              <input type="radio" id={playlist.id} name="playlist" value={playlist.id} required />
               <label htmlFor={playlist.id}>{playlist.name}</label>
             </div>
           ))}
@@ -57,17 +59,17 @@ const Host = () => {
         <div className='controls'>
           <button
             onClick={(event) => {event.preventDefault(); setOffset(offset - limit);}}
-            className={`secondary fit ${offset === 0 ? 'disabled-button' : ''}`}
+            className={`tertiary fit ${offset === 0 ? 'disabled-button' : ''}`}
             disabled={offset === 0}
           >
-            Previous
+            Previous page
           </button>
           <button
             onClick={(event) => {event.preventDefault(); setOffset(offset + limit);}}
-            className={`secondary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
+            className={`tertiary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
             disabled={playlists.length < limit}
           >
-            Next
+            Next page
           </button>
         </div>
         <input type='submit' value="START" />

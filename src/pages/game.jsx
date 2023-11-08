@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import AudioPlayer from '../../public/components/AudioPlayer';
+import Info from '../../public/components/Info';
 
 const Game = () => {
 
@@ -61,6 +62,7 @@ const Game = () => {
 
     return (
         <div className="game wrap">
+            <Info />
             <LogoComponent largeSize={false} />
             {game && game.game_tracks ? (
                 <>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
+import Info from '../../public/components/Info';
 
 const Check = () => {
 
@@ -45,6 +46,7 @@ const Check = () => {
 
     return (
         <div className="check wrap">
+            <Info />
             <button onClick={back} className='tertiary fit'>Back</button>
             <LogoComponent largeSize={false} />
             {showResult ? (

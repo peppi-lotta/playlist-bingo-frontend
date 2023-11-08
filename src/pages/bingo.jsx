@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
+import Info from '../../public/components/Info';
 
 const Bingo = () => {
 
@@ -59,6 +60,7 @@ const Bingo = () => {
 
     return (
         <div className="wrap">
+            <Info />
             <div className='bingo'>
                 <div className='tracks'>
                     {bingo?.bingo_tracks.map((track) => (

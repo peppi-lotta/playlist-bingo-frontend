@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
+import Info from '../../public/components/Info';
 
 const PreGame = () => {
     const location = useLocation();
@@ -37,6 +38,7 @@ const PreGame = () => {
 
     return (
         <div className='pre-game wrap'>
+            <Info />
             <LogoComponent largeSize={true} />
             {game ? (
                 <>
