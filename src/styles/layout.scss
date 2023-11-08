@@ -22,9 +22,11 @@ body {
     display: flex;
     flex-direction: column;
     max-width: 1000px;
+    width: calc(100% - 50px);
     padding: 0 25px;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 
 form {

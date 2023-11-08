@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const AudioPlayer = (props) => {
     const [seconds, setSeconds] = useState(0);
-    const [isPaused, setIsPaused] = useState(true); // Initialize isPaused state
+    const [isPaused, setIsPaused] = useState(false); // Initialize isPaused state
     const [trackVisible, setTrackVisible] = useState(false);
     const [artistVisible, setArtistVisible] = useState(false);
     const audioRef = useRef(null);
@@ -57,7 +57,6 @@ const AudioPlayer = (props) => {
         }
 
         if (seconds === 29) {
-            console.log('next track')
             clearInterval(interval);
             props.sendInfoToParent(true);
         }

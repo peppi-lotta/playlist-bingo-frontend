@@ -6,7 +6,7 @@ const Host = () => {
 
   const [playlists, setPlaylists] = useState([])
   const [offset, setOffset] = useState(0)
-  const limit = 7
+  const limit = 10
 
   const fetchPlaylists = () => {
     fetch(import.meta.env.VITE_BASE_URL + `/api/playlists?offset=${offset}&limit=${limit}`, {
@@ -30,7 +30,7 @@ const Host = () => {
     event.preventDefault();
     /* const type = event.target.type.value; */
     const playlist_id = event.target.playlist.value;
-    window.location.href = `/game?playlist_id=${playlist_id}`;
+    window.location.href = `/pre-game?playlist_id=${playlist_id}`;
   }
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Host = () => {
             </div>
           ))}
         </div>
-        <div className='controls game-options'>
+        <div className='controls'>
           <button
             onClick={(event) => {event.preventDefault(); setOffset(offset - limit);}}
             className={`secondary fit ${offset === 0 ? 'disabled-button' : ''}`}

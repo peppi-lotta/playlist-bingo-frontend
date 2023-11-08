@@ -2,6 +2,13 @@ $black: #120901;
 $white: #C8C8C8;
 $yellow: #F0E100;
 
+.controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 25px 0;
+}
+
 .host {
     display: flex;
     flex-direction: column;
@@ -116,18 +123,6 @@ $yellow: #F0E100;
         font-size: 32px;
     }
 
-    .controls {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        width: 100%;
-
-        &.game-options {
-            margin-top: auto;
-            margin-bottom: 25px;
-        }
-    }
-
     .looking-for {
         color: $yellow;
         font-size: 20px;
@@ -169,4 +164,28 @@ $yellow: #F0E100;
             padding: 10px;
         }
     }
+}
+
+.pre-game {
+    text-align: center;
+    font-size: 24px;
+    height: 100vh;
+    .code {
+        color: $yellow;
+        font-size: 32px;
+    }
+    .options {
+        margin-top: auto;
+        margin-bottom: 50px;
+        button {
+            margin-top: 10px;
+        }
+    }
+}
+
+.info {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 10px 0;
 }

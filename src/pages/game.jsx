@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
-import { useLocation } from 'react-router-dom';
 import AudioPlayer from '../../public/components/AudioPlayer';
 
 const Game = () => {
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const playlist_id = queryParams.get('playlist_id');
 
     const [game, setGame] = useState()
     const [currentTrack, setCurrentTrack] = useState(0)
@@ -48,24 +43,11 @@ const Game = () => {
         }
     }
 
-    const fetchGame = () => {
-        fetch(import.meta.env.VITE_BASE_URL + `/api/start-game?playlist_id=${playlist_id}`, {
-            credentials: "include",
-        }).then(response => {
-            return response.json();
-        }).then(data => {
-            setGame(data);
-            sessionStorage.setItem('game', JSON.stringify(data));
-        }).catch(error => {
-            console.error('Error fetching game data:', error);
-        });
-    }
-
     useEffect(() => {
         if (sessionStorage.getItem('game')) {
             setGame(JSON.parse(sessionStorage.getItem('game')))
         } else {
-            fetchGame();
+           window.location.href = '/'
         }
         if (sessionStorage.getItem('currentTrack')) {
             setCurrentTrack(parseInt(sessionStorage.getItem('currentTrack')))
@@ -101,7 +83,7 @@ const Game = () => {
                             Next
                         </button>
                     </div>
-                    <div className='controls game-options'>
+                    <div className='controls'>
                         <button
                             onClick={endGame}
                             className='tertiary fit'
