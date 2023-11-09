@@ -35,6 +35,21 @@ $yellow: #F0E100;
         margin-top: auto;
         margin-bottom: 50px;
     }
+
+    .name, .change-name {
+        display: none;
+        font-size: 24px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+        span {
+            margin-right: 10px;
+        }
+        &.active {
+            display: flex;
+        }
+
+    }
 }
 
 .bingo {

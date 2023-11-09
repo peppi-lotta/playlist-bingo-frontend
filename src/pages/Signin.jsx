@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import Info from '../../public/components/Info';
 
-
 const Signin = () => {
+  const storedBingoNameTag = localStorage.getItem('bingo-name-tag');
+  const [bingoNameTag, setBingoNameTag] = useState(storedBingoNameTag ? storedBingoNameTag : 'Guest');
+  const [editName, setEditName] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem('bingo')) {
@@ -22,13 +24,51 @@ const Signin = () => {
   const handleBingoSignin = (event) => {
     event.preventDefault();
     const code = event.target.code.value;
-    window.location.href = `/bingo?code=${code}`;
+    window.location.href = `/bingo?code=${code}&name_tag=${bingoNameTag}`;
+  };
+
+  const changeName = () => {
+    setEditName(true);
+    const edit = document.querySelector("#edit");
+    edit.style.display = 'flex';
+    edit.focus();
+  };
+
+  const setNameToLocalStorage = (event) => {
+    let value = event.target.value.trim().toLowerCase()
+    if (value == '') {
+      value = 'Guest'
+      localStorage.removeItem('bingo-name-tag');
+    }else {
+      localStorage.setItem('bingo-name-tag', value);
+    }
+    setEditName(false);
+    setBingoNameTag(value);
+    const edit = document.querySelector("#edit");
+    edit.style.display = 'none';
   };
 
   return (
     <div className='signin wrap'>
       <Info />
       <LogoComponent largeSize={true} />
+      <div className={`name ${!editName ? 'active' : ''}`}>
+        <span>{bingoNameTag}</span>
+        <img
+          onClick={changeName}
+          className='icon'
+          src="../pen.svg"
+          alt=""
+          style={{ width: '25px', height: '25px' }}
+        />
+      </div>
+      <input
+        id='edit'
+        className={`change-name ${editName ? 'active' : ''}`}
+        onBlur={setNameToLocalStorage}
+        onChange={(event) => {setBingoNameTag(event.target.value)}}
+        value={bingoNameTag}
+      />
       <form onSubmit={handleBingoSignin}>
         <input type='number' name='code' placeholder='CODE' />
         <input type='submit' value='PLAY' />
