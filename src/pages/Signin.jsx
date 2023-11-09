@@ -5,7 +5,7 @@ import Info from '../../public/components/Info';
 
 const Signin = () => {
   const storedBingoNameTag = localStorage.getItem('bingo-name-tag');
-  const [bingoNameTag, setBingoNameTag] = useState(storedBingoNameTag ? storedBingoNameTag : 'Guest');
+  const [bingoNameTag, setBingoNameTag] = useState(storedBingoNameTag ? storedBingoNameTag : 'guest');
   const [editName, setEditName] = useState(false);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Signin = () => {
   const setNameToLocalStorage = (event) => {
     let value = event.target.value.trim().toLowerCase()
     if (value == '') {
-      value = 'Guest'
+      value = 'guest'
       localStorage.removeItem('bingo-name-tag');
     }else {
       localStorage.setItem('bingo-name-tag', value);
@@ -68,6 +68,7 @@ const Signin = () => {
         onBlur={setNameToLocalStorage}
         onChange={(event) => {setBingoNameTag(event.target.value)}}
         value={bingoNameTag}
+        maxlength="50"
       />
       <form onSubmit={handleBingoSignin}>
         <input type='number' name='code' placeholder='CODE' />
