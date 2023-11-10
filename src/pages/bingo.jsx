@@ -3,12 +3,14 @@ import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
 import Info from '../../public/components/Info';
+import BingoNameTag from '../../public/components/BingoNameTag';
 
 const Bingo = () => {
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const code = queryParams.get('code');
+    const name_tag = queryParams.get('name_tag');
 
     const [bingo, setBingo] = useState()
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -32,7 +34,7 @@ const Bingo = () => {
     };
 
     const fetchBingo = () => {
-        fetch(import.meta.env.VITE_BASE_URL + `/auth/bingo?code=${code}`, {
+        fetch(import.meta.env.VITE_BASE_URL + `/auth/bingo?code=${code}&name_tag=${name_tag}`, {
             credentials: "include",
         })
             .then(response => {
@@ -74,9 +76,14 @@ const Bingo = () => {
                     ))}
                 </div>
                 <div className='options'>
-                    <LogoComponent largeSize={false} />
-                    {bingo?.code}
-                    <button onClick={endGame} className="secondary">Exit</button>
+                    <div>
+                        <LogoComponent largeSize={false} />
+                        <BingoNameTag update={true} />
+                    </div>
+                    <div>
+                        <button onClick={endGame} className="secondary">Exit</button>
+                        {bingo?.code}
+                    </div>
                 </div>
             </div>
         </div>
