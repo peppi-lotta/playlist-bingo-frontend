@@ -19,7 +19,6 @@ const Host = () => {
         return response.json();
       })
       .then(data => {
-        console.log(data)
         setPlaylists(data.playlists);
       })
       .catch(error => {

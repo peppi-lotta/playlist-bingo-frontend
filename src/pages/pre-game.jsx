@@ -3,15 +3,24 @@ import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
 import Info from '../../public/components/Info';
+import QRCode from "react-qr-code";
 
 const PreGame = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const playlist_id = queryParams.get('playlist_id');
-    const [game, setGame] = useState(null); // Initialize game as null
+    const [game, setGame] = useState(null);
+    const qrURL = import.meta.env.VITE_BASE_URL
 
     const start = () => {
         window.location.href = '/game';
+    }
+
+    const tryAgain = () => {
+        sessionStorage.removeItem('game');
+        sessionStorage.removeItem('currentTrack');
+        sessionStorage.removeItem('wins');
+        window.location.href = `.`;
     }
 
     const fetchGame = () => {
@@ -40,10 +49,13 @@ const PreGame = () => {
         <div className='pre-game wrap'>
             <Info />
             <LogoComponent largeSize={true} />
-            {game ? (
+            {game?.code ? (
                 <>
                     <p>Game code:</p>
                     <span className='code'>{game.code}</span>
+                    <div style={{ background: 'white', padding: '16px' }}>
+                        <QRCode class="qr" value={qrURL} />
+                    </div>
                     <div className='options'>
                         <p>Everybody ready? Let's play!</p>
                         <button className='fit' onClick={start}>PLAY</button>
@@ -51,7 +63,10 @@ const PreGame = () => {
 
                 </>
             ) : (
-                <p>Loading game data...</p> // Display a loading message while fetching data
+                <>
+                    <p>Loading game data...</p>
+                    <button onClick={tryAgain}>Try again</button>
+                </>
             )}
         </div>
     );

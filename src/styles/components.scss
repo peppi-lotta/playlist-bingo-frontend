@@ -21,7 +21,6 @@ $yellow: #F0E100;
 }
 
 .signin {
-    height: 100vh;
     justify-content: space-around;
 
     .logo {
@@ -34,21 +33,6 @@ $yellow: #F0E100;
         align-items: center;
         margin-top: auto;
         margin-bottom: 50px;
-    }
-
-    .name, .change-name {
-        display: none;
-        font-size: 24px;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 25px;
-        span {
-            margin-right: 10px;
-        }
-        &.active {
-            display: flex;
-        }
-
     }
 }
 
@@ -93,7 +77,7 @@ $yellow: #F0E100;
         display: flex;
         flex-direction: column;
         height: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
         padding: 10px;
         font-size: 24px;
         color: $yellow;
@@ -104,7 +88,6 @@ $yellow: #F0E100;
 .game {
     font-weight: 700;
     font-size: 24px;
-    height: 100vh;
 
     .info {
         display: flex;
@@ -143,37 +126,44 @@ $yellow: #F0E100;
         font-size: 20px;
         margin-top: 25px;
     }
+
     .bottom {
         margin-top: auto;
     }
 }
+
 .check {
-    height: 100vh;
     .tertiary {
         margin-right: auto;
     }
+
     form {
         margin: auto;
     }
+
     p {
         font-size: 24px;
         font-weight: 700;
     }
+
     .answer {
         font-size: 32px;
         text-align: center;
         margin: auto;
+
         .win {
             font-size: 50px;
             color: $yellow;
         }
     }
+
     ul {
         display: flex;
         flex-wrap: wrap;
         font-size: 16px;
         justify-content: center;
         text-align: center;
+
         li {
             list-style: none;
             padding: 10px;
@@ -185,13 +175,16 @@ $yellow: #F0E100;
     text-align: center;
     font-size: 24px;
     height: 100vh;
+
     .code {
         color: $yellow;
         font-size: 32px;
     }
+
     .options {
         margin-top: auto;
         margin-bottom: 50px;
+
         button {
             margin-top: 10px;
         }
@@ -203,4 +196,29 @@ $yellow: #F0E100;
     justify-content: flex-end;
     width: 100%;
     margin: 10px 0;
+}
+
+.bingo-name-tag-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .name,
+    .change-name {
+        display: none;
+        font-size: 20px;
+        font-weight: 700;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+        color: $white;
+        width: fit-content;
+        text-align: center;
+        span {
+            margin-right: 10px;
+        }
+
+        &.active {
+            display: flex;
+        }
+    }
 }
