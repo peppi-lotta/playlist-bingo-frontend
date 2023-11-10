@@ -4,6 +4,7 @@ import LogoComponent from '../../public/components/LogoComponent';
 import { useLocation } from 'react-router-dom';
 import Info from '../../public/components/Info';
 import QRCode from "react-qr-code";
+import GameLoading from '../../public/components/GameLoading';
 
 const PreGame = () => {
     const location = useLocation();
@@ -13,13 +14,6 @@ const PreGame = () => {
 
     const start = () => {
         window.location.href = '/game';
-    }
-
-    const tryAgain = () => {
-        sessionStorage.removeItem('game');
-        sessionStorage.removeItem('currentTrack');
-        sessionStorage.removeItem('wins');
-        window.location.href = `.`;
     }
 
     const fetchGame = () => {
@@ -63,8 +57,7 @@ const PreGame = () => {
                 </>
             ) : (
                 <>
-                    <p>Loading game data...</p>
-                    <button onClick={tryAgain}>Try again</button>
+                    <GameLoading />
                 </>
             )}
         </div>

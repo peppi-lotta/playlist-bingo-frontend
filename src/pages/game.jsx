@@ -3,6 +3,7 @@ import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import AudioPlayer from '../../public/components/AudioPlayer';
 import Info from '../../public/components/Info';
+import GameLoading from '../../public/components/GameLoading';
 
 const Game = () => {
 
@@ -64,7 +65,7 @@ const Game = () => {
         <div className="game wrap">
             <Info />
             <LogoComponent largeSize={false} />
-            {game && game.game_tracks ? (
+            {(typeof game !== "undefined") && game.game_tracks ? (
                 <>
                     <span className='code'>{game.code}</span>
                     <span className='track-count'>{currentTrack + 1} / 30</span>
@@ -101,17 +102,7 @@ const Game = () => {
                     </div>
                 </>
             ) : (
-                <>
-                    <p>Loading game data...</p>
-                    <div className='bottom'>
-                        <p>Game not loading? Try to start again</p>
-                        <button
-                            onClick={endGame}
-                        >
-                            Start new game
-                        </button>
-                    </div>
-                </>
+                <GameLoading />
             )}
         </div>
     );

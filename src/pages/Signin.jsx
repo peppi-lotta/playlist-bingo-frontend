@@ -31,8 +31,8 @@ const Signin = () => {
       <LogoComponent largeSize={true} />
       <BingoNameTag update={false} />
       <form onSubmit={handleBingoSignin}>
-        <input type='number' name='code' placeholder='CODE' />
-        <input type='submit' value='PLAY' />
+        <input type='number' name='code' placeholder='CODE' required/>
+        <input type='submit' value='JOIN BINGO' />
       </form>
       <div className='want-to-host'>
         <span>Want to host a game?</span>

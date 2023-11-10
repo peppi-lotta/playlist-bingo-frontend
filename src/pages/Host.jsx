@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import Info from '../../public/components/Info';
+import GameLoading from '../../public/components/GameLoading';
 
 const Host = () => {
 
@@ -41,38 +42,40 @@ const Host = () => {
     <div className="host wrap">
       <Info />
       <LogoComponent largeSize={false} />
-      <form onSubmit={handleSubmit}>
-{/*         <select name="type">
-          <option value="artist">New Artist Bingo</option>
-          <option vlaue="song">New Song Bingo</option>
-        </select> */}
-        <div className="playlist-list">
-          <p>Choose a playlist:</p>
-          {playlists.map(playlist => (
-            <div className='playlist' key={playlist.id}>
-              <input type="radio" id={playlist.id} name="playlist" value={playlist.id} required />
-              <label htmlFor={playlist.id}>{playlist.name}</label>
+      {(typeof playlists !== "undefined") && playlists.length > 0 ? (
+        <>
+          <form onSubmit={handleSubmit}>
+            <div className="playlist-list">
+              <p>Choose a playlist:</p>
+              {playlists.map(playlist => (
+                <div className='playlist' key={playlist.id}>
+                  <input type="radio" id={playlist.id} name="playlist" value={playlist.id} required />
+                  <label htmlFor={playlist.id}>{playlist.name}</label>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className='controls'>
-          <button
-            onClick={(event) => {event.preventDefault(); setOffset(offset - limit);}}
-            className={`tertiary fit ${offset === 0 ? 'disabled-button' : ''}`}
-            disabled={offset === 0}
-          >
-            Previous page
-          </button>
-          <button
-            onClick={(event) => {event.preventDefault(); setOffset(offset + limit);}}
-            className={`tertiary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
-            disabled={playlists.length < limit}
-          >
-            Next page
-          </button>
-        </div>
-        <input type='submit' value="START" />
-      </form>
+            <div className='controls'>
+              <button
+                onClick={(event) => { event.preventDefault(); setOffset(offset - limit); }}
+                className={`tertiary fit ${offset === 0 ? 'disabled-button' : ''}`}
+                disabled={offset === 0}
+              >
+                Previous page
+              </button>
+              <button
+                onClick={(event) => { event.preventDefault(); setOffset(offset + limit); }}
+                className={`tertiary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
+                disabled={playlists.length < limit}
+              >
+                Next page
+              </button>
+            </div>
+            <input type='submit' value="START" />
+          </form>
+        </>
+      ) : (
+        <GameLoading />
+      )}
     </div>
   );
 };
