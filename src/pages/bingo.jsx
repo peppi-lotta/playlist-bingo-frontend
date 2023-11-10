@@ -10,7 +10,7 @@ const Bingo = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const code = queryParams.get('code');
-    const name_tag = queryParams.get('name_tag');
+    const name_tag = localStorage.getItem('bingo-name-tag')
 
     const [bingo, setBingo] = useState()
     const [selectedTracks, setSelectedTracks] = useState([]);

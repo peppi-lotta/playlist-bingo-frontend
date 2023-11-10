@@ -22,9 +22,7 @@ const Signin = () => {
   const handleBingoSignin = (event) => {
     event.preventDefault();
     const code = event.target.code.value;
-    const name_tag = localStorage.getItem('bingo-name-tag')
-    console.log(name_tag)
-    window.location.href = `/bingo?code=${code}&name_tag=${name_tag}`;
+    window.location.href = `/bingo?code=${code}`;
   };
 
   return (

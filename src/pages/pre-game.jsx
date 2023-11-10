@@ -10,7 +10,6 @@ const PreGame = () => {
     const queryParams = new URLSearchParams(location.search);
     const playlist_id = queryParams.get('playlist_id');
     const [game, setGame] = useState(null);
-    const qrURL = import.meta.env.VITE_BASE_URL
 
     const start = () => {
         window.location.href = '/game';
@@ -54,7 +53,7 @@ const PreGame = () => {
                     <p>Game code:</p>
                     <span className='code'>{game.code}</span>
                     <div style={{ background: 'white', padding: '16px' }}>
-                        <QRCode class="qr" value={qrURL} />
+                        <QRCode class="qr" value={import.meta.env.VITE_FRONT_URL + `/bingo?code=${game.code}`} />
                     </div>
                     <div className='options'>
                         <p>Everybody ready? Let's play!</p>
