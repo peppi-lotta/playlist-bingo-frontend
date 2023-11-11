@@ -44,8 +44,15 @@ const ShowStats = () => {
         setSelectedEndDate(date);
     };
 
+    const goBack = () => {
+        window.history.back();
+    };
+
     return (
         <div className='show-stats wrap'>
+            <>
+                <button className='tertiary fit back' onClick={goBack}>Go Back</button>
+            </>
             <LogoComponent largeSize={false} />
             <p>Select dates:</p>
             <div className='dates'>
