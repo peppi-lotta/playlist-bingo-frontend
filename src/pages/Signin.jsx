@@ -38,6 +38,7 @@ const Signin = () => {
         <span>Want to host a game?</span>
         <button className='secondary' onClick={handleSpotifySignin}>Log in with Spotify</button>
       </div>
+      <a href='/show-stats'>Check points</a>
     </div>
   );
 };
