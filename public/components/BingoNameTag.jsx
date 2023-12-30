@@ -27,7 +27,7 @@ function BingoNameTag(props) {
         const edit = document.querySelector("#edit");
         edit.style.display = 'none';
         if (update) {
-            fetch(import.meta.env.VITE_BASE_URL + `/bingo/update-name?code=${JSON.parse(sessionStorage.getItem('bingo')).code}&name_tag=${bingoNameTag}`, {
+            fetch(import.meta.env.VITE_BASE_URL + `/bingo/update-name?code=${JSON.parse(sessionStorage.getItem('bingo')).code}&name_tag=${value}`, {
                 credentials: "include",
             })
                 .then(response => {

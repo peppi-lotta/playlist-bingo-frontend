@@ -14,7 +14,8 @@ const Check = () => {
 
     const check = (event) => {
         event.preventDefault();
-        checkBingo(event.target.bingo_code.value)
+        let checkVal = event.target.bingo_code.value.trim().toLowerCase();
+        checkBingo(checkVal)
     }
 
     const back = () => {

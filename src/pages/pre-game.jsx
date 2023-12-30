@@ -47,7 +47,7 @@ const PreGame = () => {
                     <p>Game code:</p>
                     <span className='code'>{game.code}</span>
                     <div style={{ background: 'white', padding: '16px' }}>
-                        <QRCode class="qr" value={import.meta.env.VITE_FRONT_URL + `/bingo?code=${game.code}`} />
+                        <QRCode className="qr" value={import.meta.env.VITE_FRONT_URL + `/bingo?code=${game.code}`} />
                     </div>
                     <div className='options'>
                         <p>Everybody ready? Let's play!</p>

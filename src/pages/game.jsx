@@ -26,7 +26,7 @@ const Game = () => {
     }
 
     const changeTrack = (val) => {
-        if (currentTrack < 30) {
+        if (currentTrack < 29) {
             const cur = currentTrack + val
             setCurrentTrack(cur)
             sessionStorage.setItem('currentTrack', cur);

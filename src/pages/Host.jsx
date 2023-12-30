@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import '../styles/components.scss';
 import LogoComponent from '../../public/components/LogoComponent';
 import Info from '../../public/components/Info';
@@ -7,11 +7,13 @@ import GameLoading from '../../public/components/GameLoading';
 const Host = () => {
 
   const [playlists, setPlaylists] = useState([])
+  const observerTarget = useRef(null);
+  const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0)
   const limit = 10
 
-  const fetchPlaylists = () => {
-    fetch(import.meta.env.VITE_BASE_URL + `/api/playlists?offset=${offset}&limit=${limit}`, {
+  const fetchPlaylists = async () => {
+    await fetch(import.meta.env.VITE_BASE_URL + `/api/playlists?offset=${offset}&limit=${limit}`, {
       method: 'GET',
       credentials: "include",
       redirect: 'follow'
@@ -20,7 +22,9 @@ const Host = () => {
         return response.json();
       })
       .then(data => {
-        setPlaylists(data.playlists);
+        setPlaylists(prevPlaylists => [...prevPlaylists, ...data.playlists]);
+        setOffset(prevOffset => prevOffset + limit);
+        setHasMore(data.playlists.length == limit)
       })
       .catch(error => {
         console.error('Error fetching playlists:', error);
@@ -36,6 +40,27 @@ const Host = () => {
 
   useEffect(() => {
     fetchPlaylists();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          fetchPlaylists();
+        }
+      },
+      { threshold: 1 }
+    );
+  
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+  
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
   }, [offset]);
 
   return (
@@ -54,22 +79,7 @@ const Host = () => {
                 </div>
               ))}
             </div>
-            <div className='controls'>
-              <button
-                onClick={(event) => { event.preventDefault(); setOffset(offset - limit); }}
-                className={`tertiary fit ${offset === 0 ? 'disabled-button' : ''}`}
-                disabled={offset === 0}
-              >
-                Previous page
-              </button>
-              <button
-                onClick={(event) => { event.preventDefault(); setOffset(offset + limit); }}
-                className={`tertiary fit ${playlists.length < limit ? 'disabled-button' : ''}`}
-                disabled={playlists.length < limit}
-              >
-                Next page
-              </button>
-            </div>
+            {hasMore && <><p>Loading more playlists</p><div ref={observerTarget} /></> }
             <input type='submit' value="START" />
           </form>
         </>
