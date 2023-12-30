@@ -26,7 +26,7 @@ const Game = () => {
     }
 
     const changeTrack = (val) => {
-        if (currentTrack < 29) {
+        if (currentTrack < 30) {
             const cur = currentTrack + val
             setCurrentTrack(cur)
             sessionStorage.setItem('currentTrack', cur);
@@ -38,10 +38,12 @@ const Game = () => {
     }
 
     const changeTrackFromChild = (data) => {
-        if (data === true) {
-            setTimeout(() => {
-                changeTrack(1)
-            }, 2000);
+        if (currentTrack < 29) {
+            if (data === true) {
+                setTimeout(() => {
+                    changeTrack(1)
+                }, 2000);
+            }
         }
     }
 
@@ -49,7 +51,7 @@ const Game = () => {
         if (sessionStorage.getItem('game')) {
             setGame(JSON.parse(sessionStorage.getItem('game')))
         } else {
-           window.location.href = '/'
+            window.location.href = '/'
         }
         if (sessionStorage.getItem('currentTrack')) {
             setCurrentTrack(parseInt(sessionStorage.getItem('currentTrack')))
