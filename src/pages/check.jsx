@@ -57,7 +57,7 @@ const Check = () => {
                         <span className='win'>BINGO!</span>
                         <button onClick={back}>Continue game</button>
                         <ul>
-                            {game.game_tracks.slice(0, current_track).map((track) => (
+                            {game.game_tracks.slice(0, parseInt(current_track)).map((track) => (
                                 <li key={track.artist_id}>{track.artist_name}</li>
                             ))}
                         </ul>
