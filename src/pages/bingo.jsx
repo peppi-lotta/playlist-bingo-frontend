@@ -62,37 +62,21 @@ const Bingo = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsPortrait(window.innerHeight > window.innerWidth && window.innerWidth < 800);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
     return (
         <div className="wrap">
             <Info />
             <div className='bingo'>
-                {isPortrait ? (
-                    <div>We cant show your bingo. Please rotate your mobile device or make screen wider!</div>
-                ) : (
-                    <div className='tracks'>
-                        {bingo?.bingo_tracks.map((track) => (
-                            <div
-                                className={`track ${selectedTracks.includes(track.artist_id) ? 'active' : ''}`}
-                                key={track.artist_id}
-                                onClick={() => toggleTrack(track.artist_id)}
-                            >
-                                {track.artist_name}
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <div className='tracks'>
+                    {bingo?.bingo_tracks.map((track) => (
+                        <div
+                            className={`track ${selectedTracks.includes(track.artist_id) ? 'active' : ''}`}
+                            key={track.artist_id}
+                            onClick={() => toggleTrack(track.artist_id)}
+                        >
+                            <span>{track.artist_name}</span>
+                        </div>
+                    ))}
+                </div>
                 <div className='options'>
                     <div>
                         <LogoComponent largeSize={false} />
