@@ -91,6 +91,22 @@ $yellow: #F0E100;
         color: $yellow;
         font-weight: 700;
     }
+    @media only screen and (max-width: 600px) {
+        flex-direction: column;
+        .tracks {
+            height: 100%;
+            .track {
+                overflow-wrap: break-word;
+                span {
+                    width: 90%;
+                }
+            }
+        }
+        .options {
+            height: 60%;
+            justify-content: unset;
+        }
+    }
 }
 
 .game {
